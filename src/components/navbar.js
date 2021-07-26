@@ -4,17 +4,14 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {loggedIn , loggedOut}  from '../redux/action/index';
 
-const Navbar = ({ getisloggin }) => {
+const Navbar = () => {
   let history = useHistory();
-  const [isloggeding, setisloggin] = React.useState(false)
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
-  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   const dispatch = useDispatch();
   const islogin = useSelector((state)=> state.isLogin)
 
-  useEffect(() => {
-    setisloggin(getisloggin())
-  }, [getisloggin])
+
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   const logout= () => {
     localStorage.removeItem('userloginObj')

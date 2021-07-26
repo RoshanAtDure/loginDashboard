@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter, HashRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch, Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
 import './App.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from "./components/navbar";
@@ -10,34 +12,30 @@ import Dashboard from "./components/dashboard";
 import UserProfile from "./components/userProfile";
 
 const App = () => {
-
-  const [isloggin, setisloggin] = React.useState(false)
-
-  useEffect(() => {
-   let user =  JSON.parse(localStorage.getItem('userloginObj'));
-   if(user != null){
-    setisloggin(true)
-   }
-  }, [])
-
-  const getisloggin = useCallback(() =>{
-    return isloggin
-  }, [isloggin])
+  const islogin = useSelector((state) => state.isLogin)
 
   return (
     <BrowserRouter>
-        <div className="App">
-          <Navbar getisloggin={getisloggin}></Navbar>
-          <Container>
+      <div className="App">
+        <Navbar></Navbar>
+        <Container>
+          {!islogin ? (
             <Switch>
               <Route exact path='/' component={Login} />
               <Route path="/sign-in" component={Login} />
               <Route path="/register" component={SignUp} />
+              <Redirect to="/" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/" exact component={Dashboard} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/userProfile" component={UserProfile} />
+              <Redirect to="/" />
             </Switch>
-          </Container>
-        </div>
+          )}
+        </Container>
+      </div>
     </BrowserRouter>
 
   );
