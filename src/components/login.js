@@ -1,12 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import {loggedIn , loggedOut}  from '../redux/action/index';
 
 function Login() {
   let history = useHistory();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [errorMsg, setMessagw] = React.useState('')
   const [isError, setError] = React.useState(false)
+  const mystate = useSelector((state)=> state.isLogin)
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     setError(false)
@@ -14,6 +18,7 @@ function Login() {
     let checkuserpresnt = reglocalList.filter(obj => obj.Email == data.Email && obj.Password == data.Password)
     if (checkuserpresnt.length > 0) {
       localStorage.setItem('userloginObj', JSON.stringify(checkuserpresnt[0]))
+      dispatch(loggedIn())
       history.push('/dashboard');
     } else {
       setError(true)
@@ -22,7 +27,7 @@ function Login() {
   }
 
   return (
-    <div className="auth-wrapper">
+    <div className="auth-wrapper dashboard-container">
       <form className="auth-inner" onSubmit={handleSubmit(onSubmit)}>
 
         {/* register your input into the hook by invoking the "register" function */}
@@ -37,7 +42,6 @@ function Login() {
                 message: "invalid email address"
               }
             })} />
-          {console.log(errors.Email)}
           {errors.Email && <span className="text-danger">{errors.Email.message ? errors.Email.message : "Please enter valid email id"}</span>}
         </div>
 

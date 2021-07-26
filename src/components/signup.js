@@ -28,7 +28,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="auth-wrapper">
+    <div className="auth-wrapper dashboard-container">
       <form className="auth-inner" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label>Name:</label>

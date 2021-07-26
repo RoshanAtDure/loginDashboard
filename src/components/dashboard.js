@@ -22,7 +22,6 @@ const Dashboard = () => {
   }
 
   const gotoprofile = (userObj) => {
-    console.log(userObj)
     history.push({
       pathname: "/userProfile",
       state: userObj,

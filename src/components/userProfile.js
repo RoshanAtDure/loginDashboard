@@ -8,7 +8,6 @@ const UserProfile = (props) => {
   const [userObj, setuserProfile] = useState(null);
 
   useEffect(() => {
-    console.log(props)
     getDetails()
   }, [])
 
