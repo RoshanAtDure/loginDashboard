@@ -1,19 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  let history = useHistory();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [errorMsg, setMessagw] = React.useState('')
   const [isError, setError] = React.useState(false)
 
   const onSubmit = (data) => {
-    console.log(data)
     setError(false)
     var reglocalList = JSON.parse(localStorage.getItem('reglocalList'));
     let checkuserpresnt = reglocalList.filter(obj => obj.Email == data.Email && obj.Password == data.Password)
-    console.log(checkuserpresnt)
     if (checkuserpresnt.length > 0) {
-
+      localStorage.setItem('userloginObj', JSON.stringify(checkuserpresnt[0]))
+      history.push('/dashboard');
     } else {
       setError(true)
       setMessagw('Email or password is incorrect!')
@@ -21,8 +22,8 @@ function Login() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="auth-wrapper">
+      <form className="auth-inner" onSubmit={handleSubmit(onSubmit)}>
 
         {/* register your input into the hook by invoking the "register" function */}
         <div className="form-group">
@@ -53,7 +54,7 @@ function Login() {
         <input type="submit" />
         <p className="forgot-password text-right">Not user?   <a href="/register">registered</a></p>
       </form>
-    </>
+    </div>
   )
 }
 
