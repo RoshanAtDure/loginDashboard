@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {loggedIn , loggedOut}  from '../redux/action/index';
 
@@ -56,7 +56,7 @@ function Login() {
 
         {isError && <div className="text-danger">{errorMsg}</div>}
         <input type="submit" />
-        <p className="forgot-password text-right">Not user?   <a href="/register">registered</a></p>
+        <p className="forgot-password text-right">Not user?  <Link to={"/register"}>registered</Link></p>
       </form>
     </div>
   )

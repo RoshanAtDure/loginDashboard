@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -100,7 +101,7 @@ export default function SignUp() {
         {isError && <div className="text-danger">{errorMsg}</div>}
         <input type="submit" />
         <p className="forgot-password text-right">
-          Already registered <a href="/">sign in?</a>
+          Already registered?  <Link to={"/"}>sign in</Link> 
         </p>
       </form>
     </div>
