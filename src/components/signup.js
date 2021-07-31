@@ -77,13 +77,13 @@ export default function SignUp() {
 
         <div className="form-group">
           <label>Gender:</label>
-          <div class="form-check">
+          <div className="form-check">
             <input {...register("Gender", { required: true })} type="radio" id="exampleRadios1" value="male" />
-            <label class="form-check-label" for="exampleRadios1"> Male</label>
+            <label className="form-check-label" for="exampleRadios1"> Male</label>
           </div>
-          <div class="form-check">
+          <div className="form-check">
             <input {...register("Gender", { required: true })} type="radio" id="exampleRadios2" value="Female" />
-            <label class="form-check-label" for="exampleRadios2"> Female</label>
+            <label className="form-check-label" for="exampleRadios2"> Female</label>
           </div>
           {errors.Gender && <span className="text-danger">{errors.Gender.message ? errors.Gender.message : "Please select gender"}</span>}
         </div>

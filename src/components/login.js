@@ -2,28 +2,34 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import {loggedIn , loggedOut}  from '../redux/action/index';
+import { loggedIn, loggedOut } from '../redux/action/index';
 
 function Login() {
   let history = useHistory();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [errorMsg, setMessagw] = React.useState('')
   const [isError, setError] = React.useState(false)
-  const mystate = useSelector((state)=> state.isLogin)
+  const mystate = useSelector((state) => state.isLogin)
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     setError(false)
     var reglocalList = JSON.parse(localStorage.getItem('reglocalList'));
-    let checkuserpresnt = reglocalList.filter(obj => obj.Email == data.Email && obj.Password == data.Password)
-    if (checkuserpresnt.length > 0) {
-      localStorage.setItem('userloginObj', JSON.stringify(checkuserpresnt[0]))
-      dispatch(loggedIn())
-      history.push('/dashboard');
+    if (reglocalList != null) {
+      let checkuserpresnt = reglocalList.filter(obj => obj.Email == data.Email && obj.Password == data.Password)
+      if (checkuserpresnt.length > 0) {
+        localStorage.setItem('userloginObj', JSON.stringify(checkuserpresnt[0]))
+        dispatch(loggedIn())
+        history.push('/dashboard');
+      } else {
+        setError(true)
+        setMessagw('Email or password is incorrect!')
+      }
     } else {
       setError(true)
-      setMessagw('Email or password is incorrect!')
+      setMessagw('User not found!')
     }
+
   }
 
   return (
