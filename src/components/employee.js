@@ -20,7 +20,7 @@ export default function Employee() {
           <div className="form-group">
             <label>Name:</label>
             <input className="form-control" type="text" placeholder="Name"
-              {...register("Firstname", {
+              {...register("Firstname"+i, {
                 required: true,
                 required: 'Name is required',
                 pattern: {
@@ -29,13 +29,14 @@ export default function Employee() {
                 }
               })}
             />
-            {errors.Firstname && <span className="text-danger">{errors.Firstname.message ? errors.Firstname.message : "Please enter first name"}</span>}
+            {console.log(errors)}
+            {errors['Firstname'+i] && <span className="text-danger">{errors['Firstname'+i] .message ? errors['Firstname'+i].message : "Please enter first name"}</span>}
           </div>
 
           <div className="form-group">
             <label>Email:</label>
             <input className="form-control" placeholder="Enter email"
-              {...register("Email", {
+              {...register("Email"+i, {
                 required: true,
                 required: 'Email is required',
                 pattern: {
@@ -43,13 +44,13 @@ export default function Employee() {
                   message: "Please enter valid email id "
                 }
               })} />
-            {errors.Email && <span className="text-danger">{errors.Email.message ? errors.Email.message : "Please enter first name"}</span>}
+            {errors['Email'+i] && <span className="text-danger">{errors['Email'+i].message ? errors['Email'+i].message : "Please enter first name"}</span>}
           </div>
 
           <div className="form-group">
             <label>Mobile number:</label>
             <input className="form-control" placeholder="Enter phone number"
-              {...register("Mobilenumber", {
+              {...register("Mobilenumber"+i, {
                 required: true,
                 required: 'Mobile number is required',
                 maxLength: 10,
@@ -58,7 +59,7 @@ export default function Employee() {
                   message: "Please enter valid phone number"
                 }
               })} />
-            {errors.Mobilenumber && <span className="text-danger">{errors.Mobilenumber.message ? errors.Mobilenumber.message : "Please enter valid phone number"}</span>}
+            {errors['Mobilenumber'+i] && <span className="text-danger">{errors['Mobilenumber'+i].message ? errors['Mobilenumber'+i].message : "Please enter valid phone number"}</span>}
           </div>
         </div>
 
