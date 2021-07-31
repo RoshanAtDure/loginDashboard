@@ -46,6 +46,9 @@ const Navbar = () => {
                     <Link className="nav-link" to={"/userProfile"}>User Profile</Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link" to={"/employee"}>employee form</Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" onClick={()=>logout()}>Logout</Link>
                   </li>
                 </>

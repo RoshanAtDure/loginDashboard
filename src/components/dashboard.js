@@ -15,12 +15,13 @@ const Dashboard = () => {
     getUserList()
   }, [])
 
-  const getUserList = () => {
+  const  getUserList = async() => {
     let url = 'users.json'
-    service.getRequest(url).then(function (data) {
+    const res = await service.getRequest(url)
+    if(res.status == 200){
       setisLoading(false)
-      setuserList(data.data)
-    });
+      setuserList(res.data)
+    }
   }
 
   const gotoprofile = (userObj) => {
@@ -66,7 +67,7 @@ const Dashboard = () => {
               <tbody>
                 {
                   userList.map((userObj, i) => {
-                    return (<tr>
+                    return (<tr key={i}>
                       <td>{i+1}</td>
                       <td>{userObj.name}</td>
                       <td>{userObj.email}</td>

@@ -10,6 +10,7 @@ import Login from "./components/login";
 import SignUp from "./components/signup";
 import Dashboard from "./components/dashboard";
 import UserProfile from "./components/userProfile";
+import Employee from "./components/employee";
 
 const App = () => {
   const islogin = useSelector((state) => state.isLogin)
@@ -31,6 +32,7 @@ const App = () => {
               <Route path="/" exact component={Dashboard} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/userProfile" component={UserProfile} />
+              <Route path="/employee" component={Employee} />
               <Redirect to="/" />
             </Switch>
           )}
